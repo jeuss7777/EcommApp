@@ -40,7 +40,7 @@ public class VendorController {
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public List<Vendor> create(@RequestBody Vendor vendor){
-		vendorService.create(vendor);
+		vendorService.save(vendor);
 		return vendorService.getAllVendors();
 	}
 	

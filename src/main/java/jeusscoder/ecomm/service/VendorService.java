@@ -27,39 +27,49 @@ private VendorDao vendorDao;
 	}
 	
 	
-	
-	public List<Vendor> create(Vendor vendor){
-		vendorDao.save(vendor);
-		return vendorDao.findAll();
-	}
-
-	public List<Vendor> findByveZipCode(Integer zip){
-
-		return vendorDao.findByveZipCode(zip);
-	}
-	
-	
-	public void update(Vendor vendor){
-		Vendor v = vendorDao.getOne(vendor.getVeVendorNumber());
+	public void save(Vendor vendor){
+		Vendor ifExistsv = vendorDao.findOne(vendor.getVeVendorNumber());
 		
-		v.setVeVendorName(vendor.getVeVendorName());
-		v.setVeAddress(vendor.getVeAddress());
-		v.setVeCity(vendor.getVeCity());
-		v.setVeState(vendor.getVeState());
-		v.setVeZipCode(vendor.getVeZipCode());
-		v.setVeTelephone(vendor.getVeTelephone());
-	
-		vendorDao.save(v);
+		if (ifExistsv == null){
+			vendorDao.save(vendor);			
+		} else{
+			System.out.println("Vendor already exist, you cannot create it");
+		}
 	}
+
+	public void update(Vendor vendor){
+		Vendor ifExistsv = vendorDao.findOne(vendor.getVeVendorNumber());
+		
+		if (ifExistsv == null){
+			System.out.println("Vendor does not exists, you cannot update it!!");
+						
+		} else{			
+			vendorDao.save(vendor);
+		}
+	}
+	
 	
 	public void delete(Integer veVendorNumber){
-		try{
+		Vendor ifExistsv = vendorDao.findOne(veVendorNumber);
+		
+		if (ifExistsv == null){
+			System.out.println("Vendor does not exists, you cannot delete it!!");
+						
+		} else{			
 			vendorDao.delete(veVendorNumber);
 		}
+		
+			
+		/*}
 		catch(javax.persistence.NoResultException e)  {
 			System.out.println("There is not a Vendor with number: " + veVendorNumber);
 			System.out.println(e.getCause().getMessage());
-		}
+		}*/
+	}
+	
+	public List<Vendor> findByveZipCode(Integer zip){
+
+		return vendorDao.findByveZipCode(zip);
 	}
 	
 }
