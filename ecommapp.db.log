@@ -1,0 +1,13 @@
+/*C21*/SET SCHEMA PUBLIC
+drop table vendor if exists
+create table vendor (ve_vendor_number integer not null, ve_address varchar(255), ve_city varchar(255), ve_state varchar(255), ve_telephone varchar(255), ve_vendor_name varchar(255), ve_zip_code integer, primary key (ve_vendor_number))
+INSERT INTO VENDOR VALUES(612368,'Calle del Arbol Seco','Lyon','TX','(33)6823-43-23','ACDelco',69000)
+INSERT INTO VENDOR VALUES(663823,'Villa Verder 9734','Chihuahua','GA','(828)882563-123','NGK',38456)
+INSERT INTO VENDOR VALUES(683728,'1101 Natchez Point','Memphis','TN','(901)123456-789','Bosh',38103)
+COMMIT
+INSERT INTO VENDOR VALUES(695621,'3201 Natchez Pt','Ashville','NC','(828)123-456-789','Bujias MX',50000)
+COMMIT
+DELETE FROM VENDOR WHERE VE_VENDOR_NUMBER=695621
+COMMIT
+INSERT INTO VENDOR VALUES(695621,'3201 Natchez Pt','Ashville','NC','(828)123-456-789','Bujias MX',50000)
+COMMIT
